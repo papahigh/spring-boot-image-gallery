@@ -13,7 +13,7 @@ import java.nio.file.Path;
 public record TempBlob(
         @NotNull Path path,
         @NotNull String name,
-        @Nullable String contentType
+        @Nullable MediaType mediaType
 ) {
 
     public Path directory() {
@@ -33,16 +33,16 @@ public record TempBlob(
     }
 
     public TempBlob alt(Path path) {
-        return new Builder(path).contentType(contentType).build();
-    }
-
-    public TempBlob alt(Path path, String contentType) {
-        return new Builder(path).contentType(contentType).build();
+        return new Builder(path).contentType(mediaType).build();
     }
 
     @Override
     public String toString() {
         return "TempBlob[%s]".formatted(name);
+    }
+
+    public static TempBlob of(Path path, MediaType mediaType) {
+        return new Builder(path).contentType(mediaType).build();
     }
 
     public static Builder builder(String name) throws IOException {
@@ -53,7 +53,7 @@ public record TempBlob(
 
         private final Path path;
         private final String name;
-        private String contentType;
+        private MediaType mediaType;
 
         private Builder(Path path) {
             this.path = path;
@@ -73,13 +73,13 @@ public record TempBlob(
             }
         }
 
-        public Builder contentType(@Nullable String contentType) {
-            this.contentType = contentType;
+        public Builder contentType(@Nullable MediaType mediaType) {
+            this.mediaType = mediaType;
             return this;
         }
 
         public TempBlob build() {
-            return new TempBlob(path, name, contentType);
+            return new TempBlob(path, name, mediaType);
         }
     }
 }
