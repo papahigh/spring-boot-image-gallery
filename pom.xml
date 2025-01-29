@@ -30,6 +30,11 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <version.jetbrains-annotations>24.1.0</version.jetbrains-annotations>
+        <version.ai-djl>0.29.0</version.ai-djl>
+        <version.commons-io>2.16.1</version.commons-io>
+        <version.hamcrest-record>1.0.0</version.hamcrest-record>
+        <version.metadata-extractor>2.19.0</version.metadata-extractor>
+        <version.tsid>2.1.3</version.tsid>
     </properties>
 
     <dependencies>
@@ -49,6 +54,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>rocks.cleancode</groupId>
+            <artifactId>hamcrest-record</artifactId>
+            <version>${version.hamcrest-record}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
@@ -61,6 +72,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

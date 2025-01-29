@@ -1,5 +1,6 @@
 package pipeline;
 
+import io.hypersistence.tsid.TSID;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -8,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static org.apache.commons.io.FilenameUtils.getExtension;
 
 
 public record TempBlob(
@@ -28,22 +31,20 @@ public record TempBlob(
         return Files.newOutputStream(path);
     }
 
+    public TempBlob create(MediaType mediaType) {
+        var path = directory().resolve(mediaType.randomFilename());
+        return new Builder(path).mediaType(mediaType).build();
+    }
+
     public long size() throws IOException {
         return Files.size(path);
     }
 
-    public TempBlob alt(Path path) {
-        return new Builder(path).contentType(mediaType).build();
-    }
-
     @Override
     public String toString() {
-        return "TempBlob[%s]".formatted(name);
+        return "TempBlob[%s]".formatted(path);
     }
 
-    public static TempBlob of(Path path, MediaType mediaType) {
-        return new Builder(path).contentType(mediaType).build();
-    }
 
     public static Builder builder(String name) throws IOException {
         return new Builder(name);
@@ -61,8 +62,8 @@ public record TempBlob(
         }
 
         private Builder(@NotNull String name) throws IOException {
-            var dir = Files.createTempDirectory("unitOfWork");
-            this.path = dir.resolve(name);
+            var dir = Files.createTempDirectory("tempBlob");
+            this.path = dir.resolve(randomRename(name));
             this.name = name;
         }
 
@@ -73,7 +74,7 @@ public record TempBlob(
             }
         }
 
-        public Builder contentType(@Nullable MediaType mediaType) {
+        public Builder mediaType(@Nullable MediaType mediaType) {
             this.mediaType = mediaType;
             return this;
         }
@@ -81,5 +82,16 @@ public record TempBlob(
         public TempBlob build() {
             return new TempBlob(path, name, mediaType);
         }
+    }
+
+    public static String randomRename(@Nullable String fileName) {
+        return randomFilename(getExtension(fileName));
+    }
+
+    public static String randomFilename(@Nullable String extension) {
+        var randomName = TSID.Factory.getTsid().toString();
+        if (extension == null || extension.isEmpty())
+            return randomName;
+        return "%s.%s".formatted(randomName, extension);
     }
 }

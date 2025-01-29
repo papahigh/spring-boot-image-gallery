@@ -1,21 +1,19 @@
 package pipeline;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.experimental.Accessors;
+import lombok.ToString;
+import org.apache.commons.io.file.PathUtils;
 import pipeline.Pipeline.PipelineStep;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
 import static pipeline.UnitOfWork.ArtifactNames.INPUT_ARTIFACT_NAME;
 
 
-@Getter
-@Accessors(fluent = true)
+@ToString
 @RequiredArgsConstructor
 public final class UnitOfWork implements AutoCloseable {
 
@@ -26,16 +24,22 @@ public final class UnitOfWork implements AutoCloseable {
     }
 
     public <T> void addArtifact(String name, T artifact) {
-        this.artifacts.put(name, artifact);
+        if (artifacts.containsKey(name))
+            throw new RuntimeException("Artifact '%s' already exists".formatted(name));
+        artifacts.put(name, artifact);
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getArtifact(String name, Class<T> type) {
-        return (T) this.artifacts.get(name);
+        return (T) artifacts.get(name);
+    }
+
+    public Object getArtifact(String name) {
+        return artifacts.get(name);
     }
 
     public boolean hasArtifact(String name) {
-        return this.artifacts.containsKey(name);
+        return artifacts.containsKey(name);
     }
 
     @SneakyThrows
@@ -51,7 +55,7 @@ public final class UnitOfWork implements AutoCloseable {
 
     @Override
     public void close() throws IOException {
-        Files.deleteIfExists(this.input().directory());
+        PathUtils.deleteDirectory(this.input().directory());
     }
 
     public interface ArtifactNames {

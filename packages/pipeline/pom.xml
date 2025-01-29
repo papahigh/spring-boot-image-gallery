@@ -13,4 +13,17 @@
     <artifactId>pipeline</artifactId>
     <name>pipeline</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons-io}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-tsid</artifactId>
+            <version>${version.tsid}</version>
+        </dependency>
+    </dependencies>
+
 </project>
