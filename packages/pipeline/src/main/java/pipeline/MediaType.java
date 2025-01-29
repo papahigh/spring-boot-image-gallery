@@ -1,6 +1,8 @@
 package pipeline;
 
 
+import pipeline.TempBlob.FileName;
+
 public enum MediaType {
 
     IMAGE_JPEG("image/jpeg", "jpg"),
@@ -20,7 +22,7 @@ public enum MediaType {
     }
 
     public String randomFilename() {
-        return TempBlob.randomFilename(extension);
+        return FileName.randomFilename(extension);
     }
 
     public static MediaType of(String typeName) {

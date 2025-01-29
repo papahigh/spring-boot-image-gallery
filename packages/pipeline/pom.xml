@@ -20,9 +20,8 @@
             <version>${version.commons-io}</version>
         </dependency>
         <dependency>
-            <groupId>io.hypersistence</groupId>
-            <artifactId>hypersistence-tsid</artifactId>
-            <version>${version.tsid}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

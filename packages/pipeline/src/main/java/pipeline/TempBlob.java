@@ -1,6 +1,6 @@
 package pipeline;
 
-import io.hypersistence.tsid.TSID;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +63,7 @@ public record TempBlob(
 
         private Builder(@NotNull String name) throws IOException {
             var dir = Files.createTempDirectory("tempBlob");
-            this.path = dir.resolve(randomRename(name));
+            this.path = dir.resolve(FileName.randomRename(name));
             this.name = name;
         }
 
@@ -84,14 +84,19 @@ public record TempBlob(
         }
     }
 
-    public static String randomRename(@Nullable String fileName) {
-        return randomFilename(getExtension(fileName));
-    }
+    static class FileName {
+        private static final RandomStringUtils utils = RandomStringUtils.secure();
+        private static final int FILE_NAME_LENGTH = 24;
 
-    public static String randomFilename(@Nullable String extension) {
-        var randomName = TSID.Factory.getTsid().toString();
-        if (extension == null || extension.isEmpty())
-            return randomName;
-        return "%s.%s".formatted(randomName, extension);
+        static String randomRename(@Nullable String fileName) {
+            return randomFilename(getExtension(fileName));
+        }
+
+        static String randomFilename(@Nullable String extension) {
+            var randomName = utils.nextAlphabetic(FILE_NAME_LENGTH);
+            if (extension == null || extension.isEmpty())
+                return randomName;
+            return "%s.%s".formatted(randomName, extension);
+        }
     }
 }
