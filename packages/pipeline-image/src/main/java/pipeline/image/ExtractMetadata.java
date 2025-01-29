@@ -7,6 +7,7 @@ import com.drew.metadata.Tag;
 import com.drew.metadata.exif.GpsDirectory;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import pipeline.MediaType;
 import pipeline.Pipeline.PipelineStep;
 import pipeline.TempBlob;
@@ -100,12 +101,12 @@ public class ExtractMetadata implements PipelineStep {
         private String inputName = INPUT_ARTIFACT_NAME;
         private String outputName = METADATA_ARTIFACT_NAME;
 
-        Builder inputName(@NonNull String artifactName) {
+        Builder inputName(@NotNull String artifactName) {
             this.inputName = artifactName;
             return this;
         }
 
-        Builder outputName(@NonNull String artifactName) {
+        Builder outputName(@NotNull String artifactName) {
             this.outputName = artifactName;
             return this;
         }

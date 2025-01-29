@@ -4,7 +4,7 @@ import ai.djl.inference.Predictor;
 import ai.djl.modality.Classifications;
 import ai.djl.modality.cv.Image;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pipeline.MediaType;
 import pipeline.Pipeline;
@@ -87,17 +87,17 @@ public final class ImagePipeline {
                 return this;
             }
 
-            public ClassifyImageBuilder inputName(@NonNull String artifactName) {
+            public ClassifyImageBuilder inputName(@NotNull String artifactName) {
                 builder.inputName(artifactName);
                 return this;
             }
 
-            public ClassifyImageBuilder outputName(@NonNull String artifactName) {
+            public ClassifyImageBuilder outputName(@NotNull String artifactName) {
                 builder.outputName(artifactName);
                 return this;
             }
 
-            public ClassifyImageBuilder predictorFactory(@NonNull Supplier<Predictor<Image, Classifications>> factory) {
+            public ClassifyImageBuilder predictorFactory(@NotNull Supplier<Predictor<Image, Classifications>> factory) {
                 builder.predictorFactory(factory);
                 return this;
             }
@@ -111,12 +111,12 @@ public final class ImagePipeline {
         public class ExtractMetadataBuilder extends PipelineStepBuilder {
             private final ExtractMetadata.Builder builder = ExtractMetadata.builder();
 
-            public ExtractMetadataBuilder inputName(@NonNull String artifactName) {
+            public ExtractMetadataBuilder inputName(@NotNull String artifactName) {
                 builder.inputName(artifactName);
                 return this;
             }
 
-            public ExtractMetadataBuilder outputName(@NonNull String artifactName) {
+            public ExtractMetadataBuilder outputName(@NotNull String artifactName) {
                 builder.outputName(artifactName);
                 return this;
             }
@@ -130,17 +130,17 @@ public final class ImagePipeline {
         public class ImageMagickBuilder extends PipelineStepBuilder {
             private final ImageMagick.Builder builder = ImageMagick.builder();
 
-            public ImageMagickBuilder inputName(@NonNull String artifactName) {
+            public ImageMagickBuilder inputName(@NotNull String artifactName) {
                 builder.inputName(artifactName);
                 return this;
             }
 
-            public ImageMagickBuilder outputName(@NonNull String artifactName) {
+            public ImageMagickBuilder outputName(@NotNull String artifactName) {
                 builder.outputName(artifactName);
                 return this;
             }
 
-            public ImageMagickBuilder outputType(@NonNull MediaType mediaType) {
+            public ImageMagickBuilder outputType(@NotNull MediaType mediaType) {
                 builder.outputType(mediaType);
                 return this;
             }

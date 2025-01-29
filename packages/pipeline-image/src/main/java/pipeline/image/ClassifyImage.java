@@ -6,10 +6,10 @@ import ai.djl.modality.cv.Image;
 import ai.djl.modality.cv.ImageFactory;
 import ai.djl.translate.TranslateException;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import pipeline.Pipeline.PipelineStep;
 import pipeline.TempBlob;
 import pipeline.UnitOfWork;
@@ -85,17 +85,17 @@ public class ClassifyImage implements PipelineStep {
             return this;
         }
 
-        Builder inputName(@NonNull String artifactName) {
+        Builder inputName(@NotNull String artifactName) {
             this.inputName = artifactName;
             return this;
         }
 
-        Builder outputName(@NonNull String artifactName) {
+        Builder outputName(@NotNull String artifactName) {
             this.outputName = artifactName;
             return this;
         }
 
-        Builder predictorFactory(@NonNull Supplier<Predictor<Image, Classifications>> supplier) {
+        Builder predictorFactory(@NotNull Supplier<Predictor<Image, Classifications>> supplier) {
             this.predictors = ThreadLocal.withInitial(supplier);
             return this;
         }

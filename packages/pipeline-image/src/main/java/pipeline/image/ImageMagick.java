@@ -1,9 +1,9 @@
 package pipeline.image;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pipeline.MediaType;
 import pipeline.Pipeline.PipelineStep;
@@ -84,17 +84,17 @@ public class ImageMagick implements PipelineStep {
         private String quality;
         private boolean strip = true;
 
-        Builder inputName(@NonNull String artifactName) {
+        Builder inputName(@NotNull String artifactName) {
             this.inputName = artifactName;
             return this;
         }
 
-        Builder outputName(@NonNull String artifactName) {
+        Builder outputName(@NotNull String artifactName) {
             this.outputName = artifactName;
             return this;
         }
 
-        Builder outputType(@NonNull MediaType mediaType) {
+        Builder outputType(@NotNull MediaType mediaType) {
             this.outputType = mediaType;
             return this;
         }
