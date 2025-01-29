@@ -65,7 +65,7 @@ public class ImageMagick implements PipelineStep {
     }
 
     private static void execute(List<String> command) throws IOException, InterruptedException {
-        var exit = new ProcessBuilder().command(command).inheritIO().start().waitFor();
+        var exit = new ProcessBuilder().command(command).start().waitFor();
         if (exit != 0) {
             throw new RuntimeException("Error occurred while executing command: %s".formatted(command));
         }
