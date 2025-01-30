@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>spring-boot-image-gallery</artifactId>
         <groupId>io.github.papahigh</groupId>
@@ -10,34 +9,27 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>pipeline-image</artifactId>
-    <name>pipeline-image</name>
+    <artifactId>blobstore-fs</artifactId>
+    <name>blobstore-fs</name>
 
     <dependencies>
 
         <dependency>
             <groupId>io.github.papahigh</groupId>
-            <artifactId>pipeline</artifactId>
+            <artifactId>blobstore</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>ai.djl</groupId>
-            <artifactId>api</artifactId>
-            <version>${version.ai-djl}</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons-io}</version>
         </dependency>
         <dependency>
-            <groupId>com.drewnoakes</groupId>
-            <artifactId>metadata-extractor</artifactId>
-            <version>${version.metadata-extractor}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>ai.djl.pytorch</groupId>
-            <artifactId>pytorch-engine</artifactId>
-            <version>${version.ai-djl}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -48,7 +40,5 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
 </project>

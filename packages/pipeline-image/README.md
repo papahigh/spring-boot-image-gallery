@@ -4,6 +4,8 @@ The **`pipeline-image`** module provides a flexible and extensible API for build
 The module offers integration with [Deep Java Library](https://djl.ai/),
 [ImageMagick](https://imagemagick.org/), and [metadata-extractor](https://github.com/drewnoakes/metadata-extractor).
 
+---
+
 ## Java API
 
 The `ImagePipeline` class serves as the entry point for building configurable and extensible

@@ -18,7 +18,7 @@
 
     <modules>
         <module>packages/blobstore</module>
-        <module>packages/blobstore-filesystem</module>
+        <module>packages/blobstore-fs</module>
         <module>packages/pipeline</module>
         <module>packages/pipeline-image</module>
     </modules>
