@@ -1,6 +1,6 @@
 # blobstore-fs
 
-Blobstore implementation backed by file system as the storage backend.
+This is a Blobstore implementation backed by a file system as the storage backend.
 
 
 ## Java API
