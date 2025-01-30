@@ -2,7 +2,6 @@
 
 Blobstore implementation backed by file system as the storage backend.
 
----
 
 ## Java API
 
