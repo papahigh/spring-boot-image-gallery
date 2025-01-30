@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>apps/image-gallery-api</module>
         <module>packages/blobstore</module>
         <module>packages/blobstore-fs</module>
         <module>packages/pipeline</module>
