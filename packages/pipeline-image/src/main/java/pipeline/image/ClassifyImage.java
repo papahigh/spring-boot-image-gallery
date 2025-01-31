@@ -36,7 +36,6 @@ public class ClassifyImage implements PipelineStep {
 
     @Override
     public void process(UnitOfWork unitOfWork) throws IOException {
-
         var input = unitOfWork.getArtifact(inputName, TempBlob.class);
         Objects.requireNonNull(input, "inputArtifact must not be null");
 
@@ -51,7 +50,6 @@ public class ClassifyImage implements PipelineStep {
             }
 
             unitOfWork.addArtifact(outputName, new ImageClasses(output));
-
         } catch (TranslateException e) {
             log.error("Error occurred while classifying image", e);
         }

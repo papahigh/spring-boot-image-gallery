@@ -34,7 +34,6 @@ public class ExtractMetadata implements PipelineStep {
 
     @Override
     public void process(UnitOfWork unitOfWork) throws IOException {
-
         var input = unitOfWork.getArtifact(inputName, TempBlob.class);
         Objects.requireNonNull(input, "inputArtifact must not be null");
 
@@ -55,13 +54,13 @@ public class ExtractMetadata implements PipelineStep {
             }
 
             unitOfWork.addArtifact(outputName, output.build());
-
         } catch (ImageProcessingException e) {
             log.error("Error occurred while extracting image metadata", e);
         }
     }
 
     private static final Map<MediaType, FileType> MAPPINGS = new EnumMap<>(MediaType.class) {{
+        put(IMAGE_AVIF, QuickTime);
         put(IMAGE_JPEG, Jpeg);
         put(IMAGE_PNG, Png);
         put(IMAGE_WEBP, WebP);

@@ -59,6 +59,23 @@ public class ExtractMetadataTest {
     }
 
     @Test
+    void testExtractAvif() throws Exception {
+
+        var step = ExtractMetadata.builder().build();
+        var blob = getBlob("images/avif/3840x2160.avif", IMAGE_AVIF);
+
+        try (var unit = UnitOfWork.of(blob)) {
+
+            step.process(unit);
+
+            var output = unit.getArtifact(METADATA_ARTIFACT_NAME, Metadata.class);
+
+            assertEquals(43.467448, output.gps().latitude(), 1e-6);
+            assertEquals(11.885126, output.gps().longitude(), 1e-6);
+        }
+    }
+
+    @Test
     void testExtractPng() throws Exception {
 
         var step = ExtractMetadata.builder().build();
