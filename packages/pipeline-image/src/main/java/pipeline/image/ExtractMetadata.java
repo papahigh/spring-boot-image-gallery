@@ -44,12 +44,10 @@ public class ExtractMetadata implements PipelineStep {
 
             var output = Metadata.builder();
             for (var it : metadata.getDirectories()) {
-                if (it instanceof GpsDirectory gps) {
+                if (it instanceof GpsDirectory gps)
                     output.gps(GpsMetadata.of(gps));
-                } else {
-                    for (var tag : it.getTags()) {
-                        output.tag(MetadataTag.of(tag));
-                    }
+                for (var tag : it.getTags()) {
+                    output.tag(MetadataTag.of(tag));
                 }
             }
 
@@ -83,7 +81,7 @@ public class ExtractMetadata implements PipelineStep {
         }
     }
 
-    public record MetadataTag(String directory, String tag, String value) {
+    public record MetadataTag(String directory, String tagName, String tagValue) {
         static MetadataTag of(Tag tag) {
             return new MetadataTag(tag.getDirectoryName(), tag.getTagName(), tag.getDescription());
         }
