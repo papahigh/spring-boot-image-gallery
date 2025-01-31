@@ -12,18 +12,16 @@ image processing pipelines. It provides a fluent API to define a sequence of pro
 that can be applied to image artifacts. The steps include classification, metadata extraction,
 and general image manipulation using ImageMagick.
 
-
 ```java
 import pipeline.MediaType;
 import pipeline.TempBlob;
 import pipeline.image.ImagePipeline;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 class Example {
-
     public static void main(String[] args) {
-
         // @formatter:off
         var pipeline = ImagePipeline.builder()
                 .extractMetadata()
@@ -49,14 +47,14 @@ class Example {
                     .topK(10)
                 .build();
         // @formatter:on
-        
+
         var blob = TempBlob.builder("dog.jpg")
                 .mediaType(MediaType.IMAGE_JPEG)
                 .content(Files.newInputStream(Path.of("dog.jpg")))
                 .build();
 
         var output = pipeline.process(blob);
-        
+
         System.out.println(output.getArtifact("thumbnail_jpg"));
         System.out.println(output.getArtifact("thumbnail_webp"));
         System.out.println(output.getArtifact("classification"));
