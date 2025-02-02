@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 import static org.apache.commons.io.FilenameUtils.getExtension;
 
@@ -16,7 +17,7 @@ import static org.apache.commons.io.FilenameUtils.getExtension;
 public record TempBlob(
         @NotNull Path path,
         @NotNull String name,
-        @Nullable MediaType mediaType
+        @NotNull MediaType mediaType
 ) {
 
     public Path directory() {
@@ -74,12 +75,15 @@ public record TempBlob(
             }
         }
 
-        public Builder mediaType(@Nullable MediaType mediaType) {
+        public Builder mediaType(@NotNull MediaType mediaType) {
             this.mediaType = mediaType;
             return this;
         }
 
         public TempBlob build() {
+            Objects.requireNonNull(path, "path must not be null");
+            Objects.requireNonNull(name, "name must not be null");
+            Objects.requireNonNull(mediaType, "mediaType must not be null");
             return new TempBlob(path, name, mediaType);
         }
     }

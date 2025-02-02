@@ -197,7 +197,7 @@ public class ExtractMetadataTest {
     }
 
     private static TempBlob getBlob(String fileName, String mediaType) {
-        return getBlob(fileName, MediaType.of(mediaType));
+        return getBlob(fileName, MediaType.ofTypeName(mediaType));
     }
 
     @SneakyThrows

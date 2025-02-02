@@ -69,13 +69,15 @@ public final class ImagePipeline {
             return new Pipeline(steps);
         }
 
-        class PipelineStepBuilder {
+        abstract class PipelineStepBuilder {
             protected void addStep(PipelineStep step) {
                 PipelineBuilder.this.steps.add(step);
             }
 
+            abstract PipelineBuilder and();
+
             public Pipeline build() {
-                return PipelineBuilder.this.build();
+                return and().build();
             }
         }
 
@@ -102,6 +104,7 @@ public final class ImagePipeline {
                 return this;
             }
 
+            @Override
             public PipelineBuilder and() {
                 addStep(builder.build());
                 return PipelineBuilder.this;
@@ -121,6 +124,7 @@ public final class ImagePipeline {
                 return this;
             }
 
+            @Override
             public PipelineBuilder and() {
                 addStep(builder.build());
                 return PipelineBuilder.this;
@@ -165,6 +169,7 @@ public final class ImagePipeline {
                 return this;
             }
 
+            @Override
             public PipelineBuilder and() {
                 addStep(builder.build());
                 return PipelineBuilder.this;

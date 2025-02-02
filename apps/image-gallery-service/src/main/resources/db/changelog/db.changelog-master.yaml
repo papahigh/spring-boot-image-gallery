@@ -1,0 +1,180 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-blob-table
+      author: papahigh (generated)
+      changes:
+        - createTable:
+            tableName: blob
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(13)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content_type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_size
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: blob_path
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: external_url
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-image-table
+      author: papahigh (generated)
+      changes:
+        - createTable:
+            tableName: image
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(13)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: geo_lat
+                  type: NUMERIC(8, 6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: geo_lon
+                  type: NUMERIC(9, 6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: geo_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: thumbnail
+                  type: JSONB
+                  constraints:
+                    nullable: false
+              - column:
+                  name: full_size
+                  type: JSONB
+                  constraints:
+                    nullable: false
+              - column:
+                  name: original_file_id
+                  type: CHAR(13)
+                  constraints:
+                    nullable: false
+                    references: blob(id)
+                    foreignKeyName: fk_image_blob
+                    deleteCascade: false
+  - changeSet:
+      id: create-image-class-table
+      author: papahigh (generated)
+      changes:
+        - createTable:
+            tableName: image_class
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(13)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: image_id
+                  type: CHAR(13)
+                  constraints:
+                    nullable: false
+                    references: image(id)
+                    foreignKeyName: fk_image_class_image
+                    deleteCascade: true
+              - column:
+                  name: class_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: probability
+                  type: NUMERIC(5, 4)
+                  constraints:
+                    nullable: false
+        - createIndex:
+            indexName: ix_image_class_image
+            tableName: image_class
+            columns:
+              - column:
+                  name: image_id
+  - changeSet:
+      id: create-image-meta-table
+      author: papahigh (generated)
+      changes:
+        - createTable:
+            tableName: image_meta
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(13)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: image_id
+                  type: CHAR(13)
+                  constraints:
+                    nullable: false
+                    references: image(id)
+                    foreignKeyName: fk_image_meta_image
+                    deleteCascade: true
+              - column:
+                  name: directory
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tag_value
+                  type: TEXT
+                  constraints:
+                    nullable: false
+        - createIndex:
+            indexName: ix_image_meta_image
+            tableName: image_meta
+            columns:
+              - column:
+                  name: image_id

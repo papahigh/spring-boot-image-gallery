@@ -76,7 +76,7 @@ public class FsBlobStoreTest {
 
         var getResponse = getBlobStore().getBlob(BlobPath.of("unknown/path"));
 
-        assertThrows(BlobStoreException.class, getResponse::inputStream);
+        assertThrows(IOException.class, getResponse::inputStream);
     }
 
     @Test

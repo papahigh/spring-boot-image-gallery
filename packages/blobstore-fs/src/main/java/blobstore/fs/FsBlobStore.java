@@ -29,18 +29,8 @@ public class FsBlobStore implements BlobStore {
     private final ExternalUrlProvider urlProvider;
 
     @Override
-    public GetBlobResponse getBlob(@NotNull BlobPath blobPath) throws BlobStoreException {
-        return new GetBlobResponse() {
-            @Override
-            public @NotNull InputStream inputStream() throws BlobStoreException {
-                try {
-                    return Files.newInputStream(resolvePath(blobPath));
-                } catch (IOException e) {
-                    log.error("Failed to open input stream '{}'", blobPath, e);
-                    throw new BlobStoreException("Failed to open input stream '%s'".formatted(blobPath), e);
-                }
-            }
-        };
+    public GetBlobResponse getBlob(@NotNull BlobPath blobPath) {
+        return new FsGetBlobResponse(blobPath);
     }
 
     @Override
@@ -70,6 +60,18 @@ public class FsBlobStore implements BlobStore {
 
     @ToString
     @RequiredArgsConstructor
+    class FsGetBlobResponse implements GetBlobResponse {
+        @NotNull
+        private final BlobPath blobPath;
+
+        @Override
+        public @NotNull InputStream inputStream() throws IOException {
+            return Files.newInputStream(resolvePath(blobPath));
+        }
+    }
+
+    @ToString
+    @RequiredArgsConstructor
     class FsPutBlobResponse implements PutBlobResponse {
         @NotNull
         private final BlobPath blobPath;
@@ -89,10 +91,6 @@ public class FsBlobStore implements BlobStore {
         static FsDeleteBlobResponse of(@NotNull BlobPath blobPath, PathCounters counters) {
             var deleted = !(counters.getFileCounter().get() == 0 && counters.getDirectoryCounter().get() == 0);
             return new FsDeleteBlobResponse(blobPath, deleted);
-        }
-
-        static FsDeleteBlobResponse ok(@NotNull BlobPath blobPath) {
-            return new FsDeleteBlobResponse(blobPath, true);
         }
 
         static FsDeleteBlobResponse failed(@NotNull BlobPath blobPath) {

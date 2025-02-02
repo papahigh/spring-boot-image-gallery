@@ -2,6 +2,7 @@ package blobstore;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 
@@ -29,7 +30,7 @@ public interface BlobStore {
 
 
     interface GetBlobResponse {
-        @NotNull InputStream inputStream() throws BlobStoreException;
+        @NotNull InputStream inputStream() throws IOException;
     }
 
     interface DeleteBlobResponse {

@@ -83,7 +83,7 @@ public class ExtractMetadata implements PipelineStep {
 
     public record MetadataTag(String directory, String tagName, String tagValue) {
         static MetadataTag of(Tag tag) {
-            return new MetadataTag(tag.getDirectoryName(), tag.getTagName(), tag.getDescription());
+            return new MetadataTag(tag.getDirectoryName(), tag.getTagName(), tag.getDescription().trim());
         }
     }
 
