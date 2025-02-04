@@ -1,7 +1,7 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 
 public record ImageBundle(
@@ -19,17 +19,17 @@ public record ImageBundle(
         private String jpeg;
         private String webp;
 
-        public Builder avif(@NotNull String avif) {
+        public Builder avif(@Nonnull String avif) {
             this.avif = avif;
             return this;
         }
 
-        public Builder jpeg(@NotNull String jpeg) {
+        public Builder jpeg(@Nonnull String jpeg) {
             this.jpeg = jpeg;
             return this;
         }
 
-        public Builder webp(@NotNull String webp) {
+        public Builder webp(@Nonnull String webp) {
             this.webp = webp;
             return this;
         }

@@ -1,10 +1,10 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 
 public record MetaTag(
-        @NotNull String directory,
-        @NotNull String tagName,
-        @NotNull String tagValue) {
+        @Nonnull String directory,
+        @Nonnull String tagName,
+        @Nonnull String tagValue) {
 }

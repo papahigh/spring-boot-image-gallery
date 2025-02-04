@@ -39,6 +39,7 @@
         <version.mapstruct>1.6.0.Beta1</version.mapstruct>
         <version.mapstruct-lombok-binding>0.2.0</version.mapstruct-lombok-binding>
         <version.metadata-extractor>2.19.0</version.metadata-extractor>
+        <version.typescript-generator>3.2.1263</version.typescript-generator>
     </properties>
 
     <dependencyManagement>

@@ -1,7 +1,7 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 
-public record Classification(@NotNull String className, double probability) {
+public record Classification(@Nonnull String className, double probability) {
 }

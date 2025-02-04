@@ -13,6 +13,12 @@
     <artifactId>image-gallery-service</artifactId>
     <name>image-gallery-service</name>
 
+    <properties>
+        <typescript-declarations-output-file>
+            ../image-gallery-webapp/src/types.ts
+        </typescript-declarations-output-file>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -180,6 +186,37 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>cz.habarta.typescript-generator</groupId>
+                <artifactId>typescript-generator-maven-plugin</artifactId>
+                <version>${version.typescript-generator}</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classPatterns>
+                        <pattern>io.github.papahigh.types.*</pattern>
+                    </classPatterns>
+                    <jsonLibrary>jackson2</jsonLibrary>
+                    <noEslintDisable>true</noEslintDisable>
+                    <noTslintDisable>true</noTslintDisable>
+                    <indentString xml:space="preserve">  </indentString>
+                    <optionalProperties>useSpecifiedAnnotations</optionalProperties>
+                    <optionalAnnotations>
+                        <annotation>jakarta.annotation.Nullable</annotation>
+                    </optionalAnnotations>
+                    <optionalPropertiesDeclaration>nullableType</optionalPropertiesDeclaration>
+                    <outputKind>module</outputKind>
+                    <outputFile>${typescript-declarations-output-file}</outputFile>
+                    <outputFileType>implementationFile</outputFileType>
                 </configuration>
             </plugin>
         </plugins>

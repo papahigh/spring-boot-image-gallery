@@ -1,6 +1,6 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.time.LocalDateTime;
 

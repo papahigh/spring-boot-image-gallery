@@ -1,16 +1,16 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 import java.time.LocalDateTime;
 
 
 public record ImageSummary(
-        @NotNull String id,
-        @NotNull String fileName,
+        @Nonnull String id,
+        @Nonnull String fileName,
         @Nullable Location location,
-        @NotNull LocalDateTime createdAt,
-        @NotNull LocalDateTime updatedAt,
-        @NotNull ImageBundle thumbnail) {
+        @Nonnull LocalDateTime createdAt,
+        @Nonnull LocalDateTime updatedAt,
+        @Nonnull ImageBundle thumbnail) {
 }

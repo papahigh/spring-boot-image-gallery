@@ -1,17 +1,17 @@
 package io.github.papahigh.types;
 
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 
 import java.time.LocalDateTime;
 
 
 public record Blob(
-        @NotNull String id,
-        @NotNull LocalDateTime createdAt,
-        @NotNull LocalDateTime updatedAt,
-        @NotNull String contentType,
-        @NotNull String fileName,
-        @NotNull Long fileSize,
-        @NotNull String blobPath,
-        @NotNull String externalUrl) {
+        @Nonnull String id,
+        @Nonnull LocalDateTime createdAt,
+        @Nonnull LocalDateTime updatedAt,
+        @Nonnull String contentType,
+        @Nonnull String fileName,
+        @Nonnull Long fileSize,
+        @Nonnull String blobPath,
+        @Nonnull String externalUrl) {
 }
