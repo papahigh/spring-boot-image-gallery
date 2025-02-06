@@ -86,8 +86,10 @@ public abstract class UploadServiceImpl implements UploadService {
     private void copyUnitOfWork(UnitOfWork unit, ImageModel image) throws BlobStoreException {
 
         var metadata = unit.getArtifact(Util.METADATA_OUTPUT_NAME, Metadata.class);
-        image.setLocation(locationMapper.fromGpsMetadata(metadata.gps()));
-        image.setMetadata(metadata.tags().stream().map(it -> imageMetaMapper.fromMetadataTag(it, image)).toList());
+        if (metadata != null) {
+            image.setLocation(locationMapper.fromGpsMetadata(metadata.gps()));
+            image.setMetadata(metadata.tags().stream().map(it -> imageMetaMapper.fromMetadataTag(it, image)).toList());
+        }
 
         var classes = unit.getArtifact(Util.CLASSIFY_OUTPUT_NAME, ImageClasses.class);
         image.setClasses(classes.items().stream().map(it -> imageClassMapper.fromImageClass(it, image)).toList());

@@ -20,6 +20,7 @@ import java.util.Objects;
 
 import static io.github.papahigh.api.BlobController.Util.*;
 import static org.springframework.http.HttpHeaders.*;
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
 
 
 @Slf4j
@@ -50,7 +51,7 @@ public class BlobController {
         var blobPath = getBlobPath(request, "download");
         return ResponseEntity.ok()
                 .header(CACHE_CONTROL, cacheControl)
-                .header(CONTENT_TYPE, getContentType(blobPath))
+                .header(CONTENT_TYPE, APPLICATION_OCTET_STREAM_VALUE)
                 .header(CONTENT_DISPOSITION, getDisposition("attachment", blobPath))
                 .body(new InputStreamResource(blobStore.getBlob(blobPath)::inputStream));
     }

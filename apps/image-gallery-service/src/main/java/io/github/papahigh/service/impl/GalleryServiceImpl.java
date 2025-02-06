@@ -26,7 +26,7 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     @Transactional(readOnly = true)
     public Page<ImageSummary> listImages(Pageable page) {
-        var model = imageRepository.searchAllBy(page);
+        var model = imageRepository.searchAllByOrderByCreatedAtDesc(page);
         return model.map(imageMapper::toImageSummary);
     }
 
