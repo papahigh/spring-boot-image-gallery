@@ -47,7 +47,8 @@ public class ExtractMetadata implements PipelineStep {
                 if (it instanceof GpsDirectory gps)
                     output.gps(GpsMetadata.of(gps));
                 for (var tag : it.getTags()) {
-                    output.tag(MetadataTag.of(tag));
+                    if (tag.hasTagName() && tag.getDescription() != null)
+                        output.tag(MetadataTag.of(tag));
                 }
             }
 
@@ -83,7 +84,7 @@ public class ExtractMetadata implements PipelineStep {
 
     public record MetadataTag(String directory, String tagName, String tagValue) {
         static MetadataTag of(Tag tag) {
-            return new MetadataTag(tag.getDirectoryName(), tag.getTagName(), tag.getDescription().trim());
+            return new MetadataTag(tag.getDirectoryName(), tag.getTagName(), tag.getDescription().replaceAll("\u0000", ""));
         }
     }
 
