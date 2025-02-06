@@ -21,25 +21,23 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <>
-      <div className="w-max-screen flex min-h-screen flex-col">
-        <Header>
-          <div className={`flex items-center gap-2`}>
-            <Link to="/" type="text" className={`text-2xl`}>
-              Image Gallery
-            </Link>
-            <div className={`text-2xl`}>
-              <RouterSpinner />
-            </div>
-          </div>
-          <Link type="primary" to="/upload">
-            Upload
+    <div className="w-max-screen flex min-h-screen flex-col">
+      <Header>
+        <div className={`flex items-center gap-2`}>
+          <Link to="/" type="text" className={`text-2xl`}>
+            Image Gallery
           </Link>
-        </Header>
-        <Outlet />
-      </div>
+          <div className={`text-2xl`}>
+            <RouterSpinner />
+          </div>
+        </div>
+        <Link type="primary" to="/upload">
+          Upload
+        </Link>
+      </Header>
+      <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-left" />
       <TanStackRouterDevtools position="bottom-right" />
-    </>
+    </div>
   );
 }
