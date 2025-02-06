@@ -23,7 +23,7 @@ function RootComponent() {
   return (
     <>
       <div className="w-max-screen flex min-h-screen flex-col">
-        <Header className="z-10">
+        <Header>
           <div className={`flex items-center gap-2`}>
             <Link to="/" type="text" className={`text-2xl`}>
               Image Gallery
@@ -36,9 +36,7 @@ function RootComponent() {
             Upload
           </Link>
         </Header>
-        <div className={`bg-neutral-200 dark:bg-neutral-800`}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
       <ReactQueryDevtools buttonPosition="bottom-left" />
       <TanStackRouterDevtools position="bottom-right" />

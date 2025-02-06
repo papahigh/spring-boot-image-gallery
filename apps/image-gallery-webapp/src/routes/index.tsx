@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { z } from 'zod';
@@ -30,6 +31,12 @@ function IndexComponent() {
       resetScroll: false,
       viewTransition: true,
     });
+
+  useEffect(() => {
+    if (query.isFetched && query.data.page.totalElements == 0) {
+      navigate({ to: '/upload' });
+    }
+  }, [query.data, query.isFetched, navigate]);
 
   return (
     <Content>

@@ -1,4 +1,5 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
+import cx from 'classnames';
 import { z } from 'zod';
 
 import { Button } from '~/components/Button';
@@ -37,7 +38,13 @@ function RouteComponent() {
   const data = Route.useLoaderData() as ImageDetails;
   return (
     <>
-      <div className="flex flex-col items-center bg-white pb-6 pt-6 lg:pb-12 lg:pt-12 dark:bg-black">
+      <div
+        className={cx(
+          'lg:y-12 py-6',
+          'flex flex-col items-center',
+          'bg-neutral-50 dark:bg-black',
+          'shadow-neutral-250 shadow-sm dark:shadow-neutral-900',
+        )}>
         <Picture bundle={data.fullSize} className={`max-h-[calc(100vh-320px)] max-w-full`} />
       </div>
       <Content>

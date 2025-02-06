@@ -18,6 +18,7 @@ const router = createRouter({
   },
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
+  defaultViewTransition: true,
   scrollRestoration: true,
 });
 
