@@ -40,9 +40,9 @@ function RouteComponent() {
     <>
       <div
         className={cx(
-          'lg:y-12 py-6',
+          'py-6 md:py-12',
           'flex flex-col items-center',
-          'bg-neutral-50 dark:bg-black',
+          'dark:bg-black',
           'shadow-neutral-250 shadow-sm dark:shadow-neutral-900',
         )}>
         <Picture bundle={data.fullSize} className={`max-h-[calc(100vh-320px)] max-w-full`} />
