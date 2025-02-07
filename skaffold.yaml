@@ -1,0 +1,32 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: spring-boot-image-gallery
+
+profiles:
+  - name: dev
+    manifests:
+      kustomize:
+        paths:
+          - manifests/dev
+    build:
+      local: {}
+      artifacts:
+        - image: image-gallery-webapp
+          context: apps/image-gallery-webapp
+          docker:
+            cacheFrom:
+              - image-gallery-webapp
+
+        - image: image-gallery-service
+          context: apps/image-gallery-service
+          jib:
+            fromImage: openjdk23-imagemagick
+          requires:
+            - image: openjdk23-imagemagick
+
+        - image: openjdk23-imagemagick
+          context: apps/image-gallery-service
+          docker:
+            cacheFrom:
+              - openjdk23-imagemagick

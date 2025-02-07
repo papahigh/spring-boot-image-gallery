@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yml
+
+helmCharts:
+  - name: postgresql
+    repo: https://charts.bitnami.com/bitnami
+    releaseName: postgresql
+    namespace: image-gallery-env
+    version: v16.2.0
+    valuesInline:
+      primary:
+        initdb:
+          scripts:
+            initdb.sql: |
+              CREATE ROLE image_gallery WITH LOGIN PASSWORD 'image_gallery';
+              CREATE DATABASE image_gallery WITH OWNER image_gallery;
+              GRANT ALL PRIVILEGES ON DATABASE image_gallery TO image_gallery;

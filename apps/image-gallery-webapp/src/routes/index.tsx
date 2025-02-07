@@ -41,7 +41,7 @@ function IndexComponent() {
   return (
     <Content>
       <Grid>{query.data?.content?.map((image) => <ImageCard key={image.id} image={image} />)}</Grid>
-      {query?.data.page && <Pagination page={query.data.page} goTo={goToPage} />}
+      {query?.data.page.totalPages > 1 && <Pagination page={query.data.page} goTo={goToPage} />}
     </Content>
   );
 }
